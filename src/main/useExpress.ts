@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, session } from 'electron';
 import { join } from 'path';
-import { getDirList, localInfo, setStaticPath } from './fileUtils/fileRead';
+import { getDirList, getStaticPath, localInfo, setStaticPath } from './fileUtils/fileRead';
 
 const express = require("express")
 
@@ -18,6 +18,10 @@ export function useExpress() {
 
   expressApp.post('/getDevices', (req, res) => {
     res.json({ name: localInfo.deviceName });
+  })
+
+  express.post('/getStaticDirList', (req, res) => {
+    res.json({ list: getDirList(getStaticPath()) })
   })
 
   expressApp.listen(port, () => {

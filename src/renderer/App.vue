@@ -6,6 +6,24 @@ let selectdDevice = ref(false)
 
 const select = (item: any) => {
   selectdDevice.value = true
+  getList(item)
+}
+
+const dataList = ref<FileItem[]>([])
+const getList = async (device: Device) => {
+  const list: FileItem[] = await window.electronAPI.getList(device)
+  list.sort((a: FileItem, b: FileItem) => {
+    if (a.isDir && b.isDir) {
+      return 0
+    } else if (a.isDir && !b.isDir) {
+      return -1
+    } else {
+      return 1
+    }
+  })
+  console.log(list)
+  dataList.value.length = 0;
+  dataList.value = list
 }
 
 </script>
@@ -13,7 +31,7 @@ const select = (item: any) => {
 <template>
   <div>
     <Device v-if="!selectdDevice" @select="select"></Device>
-    <File v-if="selectdDevice"></File>
+    <File v-if="selectdDevice" :list="dataList"></File>
   </div>
 </template>
 
