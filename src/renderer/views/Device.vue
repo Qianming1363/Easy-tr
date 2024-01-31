@@ -13,8 +13,7 @@ const change = () => {
 }
 
 onMounted(async () => {
-
-
+  init()
 })
 
 async function init() {
