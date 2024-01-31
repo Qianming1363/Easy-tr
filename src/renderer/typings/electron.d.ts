@@ -4,7 +4,12 @@
 export default interface ElectronApi {
   getList: (device: Device) => FileItem[],
   getPathByDialog: () => DialogRes,
-  getDeviceList: () => any
+  getDeviceList: () => any,
+  downLoad: (address: string, url: string) => any,
+  getDeviceName: () => string,
+  setDeviceName: (name: string) => void,
+  getStaticPath: () => string,
+  setStaticPath: (path: string) => void,
 }
 
 declare global {

@@ -6,23 +6,13 @@ import { ipcRenderer } from "electron"
 
 const props = defineProps(["list"])
 
-const setStaticDir = async () => {
-  const res = await window.electronAPI.getPathByDialog()
-  console.log(res)
-  if (res.canceled) {
-    console.log("用户取消操作，未选择静态目录")
-  } else {
-    console.log("用户已设定分享目录")
-    console.log(res.filePaths[0])
-  }
-}
-
+const emits = defineEmits(["download"])
 
 
 
 const itemClick = (item: FileItem) => {
   // server + path 得到请求的路径
-  console.log(item)
+  emits("download", item)
 }
 </script>
 
@@ -30,8 +20,7 @@ const itemClick = (item: FileItem) => {
   <div>
     <div class="top">
       <div class="deviceName">AMD-YES</div>
-      <div class="directory">/user/code/static</div>
-      <button @click="setStaticDir">设置静态目录</button>
+
     </div>
     <ul class="list">
       <li v-for="item in props.list" :key="item.name" @click="itemClick(item)">

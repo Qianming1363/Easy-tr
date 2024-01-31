@@ -1,8 +1,10 @@
 import { ipcMain } from "electron"
-import { getDirList, getStaticPath, setStaticPath } from "../fileUtils/fileRead"
+import { getDeviceName, getDirList, getStaticPath, setDeviceName, setStaticPath } from "../fileUtils/fileRead"
 import { getPathByDialog } from "../dialog"
 import { Device, detectDevices } from "../devices/detectDevices"
 import axios from "axios"
+import { downLoadFile } from "../fileUtils/fileDownload"
+import { getLocalDeviceName, setLocalDeciveName } from "../local/local"
 /**
  * 用于主线程和渲染线程通信
  */
@@ -28,6 +30,27 @@ export function useEvent() {
   ipcMain.handle("getDeviceList", async () => {
     return await detectDevices()
   })
+  ipcMain.handle("downLoad", async (event: Electron.IpcMainInvokeEvent, address: string, url: string) => {
+    return await downLoadFile(address, url)
+  })
+
+  ipcMain.handle("getDeviceName", () => {
+    return getDeviceName()
+  })
+
+  ipcMain.handle("setDeviceName", (event: Electron.IpcMainInvokeEvent, name: string) => {
+    setDeviceName(name)
+  })
+
+  ipcMain.handle("getStaticPath", () => {
+    return getStaticPath()
+  })
+
+  ipcMain.handle("setStaticPath", (event: Electron.IpcMainInvokeEvent, path: string) => {
+    setStaticPath(path)
+  })
+
+
 
 
 }

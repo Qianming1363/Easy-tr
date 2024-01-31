@@ -49,7 +49,6 @@ export function getIpAddress() {
     if (iface) {
       for (let i = 0; i < iface.length; i++) {
         let { family, address, internal } = iface[i]
-        // win 环境有问题
         if (process.platform === 'win32' && dev.includes("WLAN") && family === 'IPv4' && address !== '127.0.0.1' && !internal) {
           return address
         }
@@ -61,5 +60,3 @@ export function getIpAddress() {
   }
   return "0:0:0:0"
 }
-
-console.log(getIpAddress())

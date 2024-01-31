@@ -25,7 +25,11 @@ function createWindow() {
   });
 
   // 开启控制台调试工具
-  mainWindow.webContents.openDevTools({ mode: 'undocked' })
+
+  setTimeout(() => {
+    mainWindow.webContents.openDevTools({ mode: 'undocked' })
+  }, 600);
+
 
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
