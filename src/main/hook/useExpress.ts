@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, session } from 'electron';
 import { join } from 'path';
-import { getDirList, getStaticPath, localInfo, setStaticPath } from './fileUtils/fileRead';
+import { getDirList, getStaticPath, localInfo, setStaticPath } from '../fileUtils/fileRead';
 
 const express = require("express")
 

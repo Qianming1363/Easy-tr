@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { setExpressStaticPath } from "../useExpress";
+import { setExpressStaticPath } from "../hook/useExpress";
 import crypto from "crypto"
 export interface FileItem {
   isDir: boolean;

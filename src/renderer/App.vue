@@ -4,14 +4,16 @@ import File from "./views/File.vue"
 import { ref } from "vue"
 let selectdDevice = ref(false)
 
-const select = (item: any) => {
+const select = async (item: any) => {
+  await getList(item as Device)
   selectdDevice.value = true
-  getList(item as Device)
 }
 
 const dataList = ref<FileItem[]>([])
 const getList = async (device: Device) => {
-  const list: FileItem[] = await window.electronAPI.getList(device)
+  console.log("获取其他设备列表", device.ip)
+  // 不能引用内存 ？？  直接写device报错
+  const list: FileItem[] = await window.electronAPI.getList({ ip: device.ip, name: device.name, path: device.path })
   list.sort((a: FileItem, b: FileItem) => {
     if (a.isDir && b.isDir) {
       return 0

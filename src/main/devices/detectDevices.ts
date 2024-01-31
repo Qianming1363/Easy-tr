@@ -22,7 +22,6 @@ export async function detectDevices() {
     return syncGetDevice(address)
   }))
 
-  console.log("设备", res.filter(e => e))
   return res.filter(e => e)
 }
 
@@ -50,7 +49,11 @@ export function getIpAddress() {
     if (iface) {
       for (let i = 0; i < iface.length; i++) {
         let { family, address, internal } = iface[i]
-        if (dev.includes("WLAN") && family === 'IPv4' && address !== '127.0.0.1' && !internal) {
+        // win 环境有问题
+        if (process.platform === 'win32' && dev.includes("WLAN") && family === 'IPv4' && address !== '127.0.0.1' && !internal) {
+          return address
+        }
+        if (process.platform === 'darwin' && family === 'IPv4' && address !== '127.0.0.1' && !internal) {
           return address
         }
       }
