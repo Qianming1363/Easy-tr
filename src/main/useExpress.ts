@@ -20,7 +20,7 @@ export function useExpress() {
     res.json({ name: localInfo.deviceName });
   })
 
-  express.post('/getStaticDirList', (req, res) => {
+  expressApp.post('/getStaticDirList', (req, res) => {
     res.json({ list: getDirList(getStaticPath()) })
   })
 

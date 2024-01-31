@@ -9,11 +9,13 @@ import axios from "axios"
 export function useEvent() {
 
   // 获取当前目录的文件列表
-  ipcMain.handle("getList", async (device: Device) => {
+  ipcMain.handle("getList", async (event: Electron.IpcMainInvokeEvent, device: Device) => {
 
     // axios 请求选中的目录，读取
-    const address = "0:0:0:0"
+    const address = device.ip
+    console.log(address)
     const res = await axios.post(`http://${address}:3000/getStaticDirList`)
+    console.log("请求的结果", res)
     return res
   })
   // 设置静态目录

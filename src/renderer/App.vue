@@ -6,7 +6,7 @@ let selectdDevice = ref(false)
 
 const select = (item: any) => {
   selectdDevice.value = true
-  getList(item)
+  getList(item as Device)
 }
 
 const dataList = ref<FileItem[]>([])

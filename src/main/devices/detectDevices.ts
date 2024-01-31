@@ -29,13 +29,13 @@ export async function detectDevices() {
 function syncGetDevice(address: string) {
   return new Promise((resolve, reject) => {
     axios.post(`http://${address}:3000/getDevices`).then((res) => {
-      console.log(res)
       resolve({
         name: res.data.name,
         ip: address,
         path: '/',
       })
     }).catch((e) => { })
+    // 600ms后取消
     setTimeout(() => {
       resolve(undefined)
     }, 600)
