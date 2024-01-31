@@ -17,6 +17,9 @@ onMounted(async () => {
   deviceName.value = localStorage.getItem("deviceName") || await window.electronAPI.getDeviceName()
   staticPath.value = localStorage.getItem("staticPath") || await window.electronAPI.getStaticPath()
 
+  window.electronAPI.setDeviceName(deviceName.value)
+  window.electronAPI.setStaticPath(staticPath.value)
+
   list.value.length = 0
   list.value = await window.electronAPI.getDeviceList()
 })
