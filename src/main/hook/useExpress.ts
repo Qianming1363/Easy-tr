@@ -10,7 +10,7 @@ export function useExpress() {
   const expressApp = express()
   expressInstance = expressApp
   const port = 3000
-  const staticPath = join(app.getAppPath(), getStaticPath())
+  const staticPath = getStaticPath()
   console.log("当前默认静态目录", staticPath)
   // setStaticPath(staticPath)
   expressApp.get('/', (req, res) => {
