@@ -20,9 +20,9 @@ const itemClick = (item: any) => {
 <template>
   <div>
     <div>在线设备</div>
-    <div v-for="item in list" :key="item.name" @click="itemClick(item)">
+    <div class="item" v-for="item in list" :key="item.name" @click="itemClick(item)">
       <span>设备名称</span>
-      <span>{{ item.name }}</span>
+      <span class="name">{{ item.name }}</span>
       <br>
       <span>设备ip</span>
       <span>{{ item.ip }}</span>
@@ -30,4 +30,16 @@ const itemClick = (item: any) => {
 
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.item {
+  width: 240px;
+  height: 80px;
+}
+
+.name {
+  display: inline-block;
+  width: 240px;
+  height: 80px;
+  text-overflow: ellipsis;
+}
+</style>

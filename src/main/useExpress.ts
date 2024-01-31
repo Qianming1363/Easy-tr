@@ -16,8 +16,8 @@ export function useExpress() {
     res.send('Hello World!')
   })
 
-  expressApp.get('/getDevices', (req, res) => {
-    res.send(localInfo.deviceName)
+  expressApp.post('/getDevices', (req, res) => {
+    res.json({ name: localInfo.deviceName });
   })
 
   expressApp.listen(port, () => {

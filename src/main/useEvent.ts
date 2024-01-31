@@ -21,7 +21,7 @@ export function useEvent() {
     }
     return res
   })
-
+  // 
   ipcMain.handle("getDeviceList", async () => {
     return await detectDevices()
   })
