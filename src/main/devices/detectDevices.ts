@@ -31,7 +31,7 @@ function syncGetDevice(address: string) {
     axios.post(`http://${address}:3000/getDevices`).then((res) => {
       console.log(res)
       resolve({
-        name: res.data,
+        name: res.data.name,
         ip: address,
         path: '/',
       })

@@ -12,7 +12,7 @@ export interface FileItem {
 
 export const localInfo = {
   static: '',
-  deviceName: crypto.randomUUID()
+  deviceName: crypto.randomUUID().substring(0, 8)
 }
 
 export function getStaticPath() {
