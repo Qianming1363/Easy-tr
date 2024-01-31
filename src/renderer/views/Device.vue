@@ -14,6 +14,10 @@ const change = () => {
 
 onMounted(async () => {
 
+
+})
+
+async function init() {
   deviceName.value = localStorage.getItem("deviceName") || await window.electronAPI.getDeviceName()
   staticPath.value = localStorage.getItem("staticPath") || await window.electronAPI.getStaticPath()
 
@@ -22,7 +26,7 @@ onMounted(async () => {
 
   list.value.length = 0
   list.value = await window.electronAPI.getDeviceList()
-})
+}
 
 const emits = defineEmits(["select"])
 
@@ -33,6 +37,9 @@ const itemClick = (item: any) => {
 const dialogVisible = ref(false)
 const openDialog = () => {
   dialogVisible.value = true
+}
+const refresh = () => {
+  init()
 }
 
 const setStaticDir = async () => {
@@ -58,6 +65,9 @@ const setStaticDir = async () => {
     <div class="top">
       <div class="title">在线设备</div>
       <div class="setting">
+        <el-icon style="cursor: pointer; margin-right: 12px;" :size="'36px'" :color="'#409EFF'" @click="refresh">
+          <Refresh />
+        </el-icon>
         <el-icon style="cursor: pointer;" :size="'36px'" :color="'#409EFF'" @click="openDialog">
           <Tools />
         </el-icon>
