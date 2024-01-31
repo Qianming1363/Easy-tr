@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import { setExpressStaticPath } from "../hook/useExpress";
 import crypto from "crypto"
+import { isMac } from "../os/check";
 export interface FileItem {
   isDir: boolean;
   path: string;
@@ -11,7 +12,7 @@ export interface FileItem {
 }
 
 export const localInfo = {
-  static: '',
+  static: isMac() ? "/Users" : "C://",
   deviceName: crypto.randomUUID().substring(0, 8)
 }
 
@@ -31,6 +32,7 @@ export function setStaticPath(staticPath: string) {
  * @returns 
  */
 export function getDirList(url: string) {
+  console.log("读取的文件地址", url)
   const filePath = path.resolve(url)
   const listDir = fs.readdirSync(filePath, { withFileTypes: true });
   const fileList: FileItem[] = []
