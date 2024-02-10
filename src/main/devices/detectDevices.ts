@@ -37,7 +37,7 @@ function syncGetDevice(address: string) {
     // 600ms后取消
     setTimeout(() => {
       resolve(undefined)
-    }, 600)
+    }, 300)
   })
 }
 

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import Device from "./views/Device.vue"
 import File from "./views/File.vue"
-import { ref } from "vue"
+import { initCustomFormatter, reactive, ref } from "vue"
 import { ElMessage } from 'element-plus'
 
 
 let selectdDevice = ref(false)
-const device = {
+const device = reactive({
   name: '',
   ip: '',
   path: ''
-}
+})
 
 const select = async (item: any) => {
   await getList(item)
@@ -45,13 +45,35 @@ const downLoad = (item: FileItem) => {
   })
 }
 
+const back = () => {
+  selectdDevice.value = false
+}
+
 </script>
 
 <template>
-  <div>
-    <Device v-if="!selectdDevice" @select="select"></Device>
-    <File v-if="selectdDevice" :list="dataList" @download="downLoad"></File>
+  <div class="container" :class="{'trans-left': selectdDevice}">
+    <transition name="fade1">
+      <Device  @select="select"></Device>
+    </transition>
+    <transition name="fade2">
+      <File  :device="device" :list="dataList" @download="downLoad" @back="back"></File>
+    </transition>
+    
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.container {
+  width: 200vw;
+  height: 100vh;
+  display: flex;
+  transition: all 0.3s ease-in-out;
+}
+.trans-left {
+  transform: translateX(-100vw);
+}
+
+
+</style>

@@ -60,7 +60,7 @@ const setStaticDir = async () => {
 </script>
 
 <template>
-  <div>
+  <div class="con">
     <div class="top">
       <div class="title">在线设备</div>
       <div class="setting">
@@ -99,6 +99,11 @@ const setStaticDir = async () => {
   </div>
 </template>
 <style scoped>
+.con {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px 40px;
+}
 .setting-item {
   width: 400px;
   display: flex;
@@ -133,6 +138,7 @@ const setStaticDir = async () => {
   font-size: 22px;
   font-weight: 600;
   color: #555;
+  user-select: none;
 }
 
 .list {
@@ -155,6 +161,7 @@ const setStaticDir = async () => {
   transition: all 0.24s ease-in-out;
   margin-right: 22px;
   margin-top: 22px;
+  user-select: none;
 }
 
 .item:hover {
