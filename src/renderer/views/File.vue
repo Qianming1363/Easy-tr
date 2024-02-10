@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import { ipcRenderer } from "electron"
-
+import Download from "../components/Download.vue";
 
 
 const props = defineProps(["list", "device"])
@@ -15,6 +15,8 @@ const itemClick = (item: FileItem) => {
   emits("download", item)
 }
 
+
+
 const back = () => {
   emits("back")
 }
@@ -26,6 +28,7 @@ const refresh = () => {
 const upload = () => {
   emits("upload")
 }
+
 
 const getIcon = (item: FileItem) => {
   if(item.name.includes("zip") || item.name.includes("rar") || item.name.includes("tar") || item.name.includes("7z")) {
@@ -47,6 +50,11 @@ const getIcon = (item: FileItem) => {
   return "Document"
 }
 
+const openFile = (item: FileItem) => {
+  window.electronAPI.openFolder(item.name)
+  console.log("打开文件夹", item.name)
+}
+
 
 </script>
 
@@ -61,13 +69,14 @@ const getIcon = (item: FileItem) => {
       <el-button class="btn" type="primary" :icon="'Upload'" @click="upload" />
     </div>
     <ul class="list">
-      <li class="item" v-for="item in props.list" :key="item.name" @click="itemClick(item)">
+      <li class="item" v-for="item in props.list" :key="item.name">
         <span class="left">
           <el-icon :size="'24px'" :color="'#409EFF'"><component :is="getIcon(item)" /></el-icon>
           <span style="margin-left: 6px;">{{ item.name }}</span>
         </span>
         <span class="right">
-          <el-button class="btn" type="primary" :icon="'Download'" @click="upload" />
+          <!-- <el-button class="btn" type="primary" :icon="'Download'" @click="itemClick(item)" /> -->
+          <Download :name="item.name" @download="itemClick(item)" @open-file="openFile(item)"></Download>
         </span>
       </li>
     </ul>
@@ -151,7 +160,9 @@ const getIcon = (item: FileItem) => {
 }
 
 .list .right {
-  margin-right: 120px;
+  width: 140px;
+
+
 }
 
 .list .right button {

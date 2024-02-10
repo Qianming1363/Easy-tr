@@ -1,3 +1,4 @@
+import { setProgress } from "./downloadProgress";
 import { getStaticPath } from "./fileRead";
 
 const axios = require('axios');
@@ -26,9 +27,9 @@ export async function downLoadFile(address: string, url: string) {
       url: fileUrl,
       responseType: 'stream',
       onDownloadProgress: (progressEvent) => {
-
-        console.log(Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%')
-        // console.log(`下载进度: ${percentCompleted}%`);
+        const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100)
+        setProgress(fileName, progress)
+        console.log(`${fileName}下载进度`, progress+ '%')
       }
     })
       .then(response => {

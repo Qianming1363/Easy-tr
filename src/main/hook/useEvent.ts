@@ -1,10 +1,12 @@
 import { ipcMain } from "electron"
-import { getDeviceName, getDirList, getStaticPath, setDeviceName, setStaticPath } from "../fileUtils/fileRead"
+import { getDeviceName, getDirList, getStaticPath, openFolder, setDeviceName, setStaticPath } from "../fileUtils/fileRead"
 import { getPathByDialog } from "../dialog"
 import { Device, detectDevices } from "../devices/detectDevices"
 import axios from "axios"
 import { downLoadFile } from "../fileUtils/fileDownload"
 import { getLocalDeviceName, setLocalDeciveName } from "../local/local"
+import { getProgress } from "../fileUtils/downloadProgress"
+import path from "path"
 /**
  * 用于主线程和渲染线程通信
  */
@@ -50,6 +52,16 @@ export function useEvent() {
     setStaticPath(path)
   })
 
+  ipcMain.handle("getDownloadProgress", (event: Electron.IpcMainInvokeEvent, name: string) => {
+    return getProgress(name)
+  })
+
+  ipcMain.handle("openFolder", (event: Electron.IpcMainInvokeEvent, name: string) => {
+    // const filePath = path.join(getStaticPath(), name);
+    openFolder(getStaticPath())
+  })
+
+  
 
 
 

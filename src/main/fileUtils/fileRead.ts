@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import { setExpressStaticPath } from "../hook/useExpress";
 import { getLocalDeviceName, getLocalStaticPath, setLocalDeciveName } from "../local/local";
+const { exec } = require('child_process');
 export interface FileItem {
   isDir: boolean;
   path: string;
@@ -69,3 +70,14 @@ export function getDirList(url: string) {
 }
 
 
+export function openFolder(filePath: string) {
+  const command = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'explorer' : 'xdg-open';
+  const cmd = `${command} ${filePath}`
+  console.log("当前执行的命令", cmd)
+  exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+  });
+}

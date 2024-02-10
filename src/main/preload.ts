@@ -11,4 +11,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   setDeviceName: (name: string) => ipcRenderer.invoke("setDeviceName", name),
   getStaticPath: () => ipcRenderer.invoke("getStaticPath"),
   setStaticPath: (path: string) => ipcRenderer.invoke("setStaticPath", path),
+  getDownloadProgress:(name:string) => ipcRenderer.invoke("getDownloadProgress", name),
+  openFolder:(name:string) => ipcRenderer.invoke("openFolder", name)
 })

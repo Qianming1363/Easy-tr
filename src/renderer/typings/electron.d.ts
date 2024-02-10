@@ -10,6 +10,8 @@ export default interface ElectronApi {
   setDeviceName: (name: string) => void,
   getStaticPath: () => string,
   setStaticPath: (path: string) => void,
+  getDownloadProgress: (name:string) => Promise<number>,
+  openFolder:(name:string) => void
 }
 
 declare global {

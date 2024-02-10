@@ -14,7 +14,8 @@ export async function detectDevices() {
   const addressList: string[] = []
   for (let i = 1; i < 255; i++) {
     if (i !== ipLast) {
-      const address = ip.replace(ipLast + '', i + '')
+      // todo 存在特殊数字检测不到的情况
+      const address = ip.replace('.'+ipLast + '', '.' + i + '')
       addressList.push(address)
     }
   }
