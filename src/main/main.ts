@@ -27,7 +27,9 @@ function createWindow() {
   // 开启控制台调试工具
 
   setTimeout(() => {
-    // mainWindow.webContents.openDevTools({ mode: 'undocked' })
+    if (process.env.NODE_ENV === "development") {
+     mainWindow.webContents.openDevTools({ mode: 'undocked' })
+    }
   }, 600);
 
 
