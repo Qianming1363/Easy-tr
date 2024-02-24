@@ -1,8 +1,8 @@
 {
-  "name": "my-app",
-  "productName": "my-app",
+  "name": "easy-te",
+  "productName": "easy-tr",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A LAN transmission tool",
   "main": ".vite/build/main.js",
   "scripts": {
     "dev": "electron-forge start",
